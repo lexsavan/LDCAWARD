@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ໂຫວດລາງວັນຂວັນໃຈ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9922A;
+    --gold-light: #F0C96B;
+    --gold-pale: #FDF4DC;
+    --gold-dark: #8B5E0A;
+    --bg: #FDFBF6;
+    --surface: #FFFFFF;
+    --border: #EAD89C;
+    --text: #1A1208;
+    --muted: #8B7A50;
+    --red: #C0392B;
+    --red-bg: #FDF0EE;
+    --green: #2D7A47;
+    --green-bg: #EAF5EE;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans Lao', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 3rem;
+  }
+
+  /* BANNER */
+  .banner {
+    width: 100%;
+    background: linear-gradient(135deg, #1A1208 0%, #3D2A04 50%, #1A1208 100%);
+    padding: 2rem 1.5rem 1.75rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(201,146,42,0.04) 20px, rgba(201,146,42,0.04) 21px);
+  }
+  .banner-crown { font-size: 40px; line-height: 1; margin-bottom: 10px; display: block; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+  .banner h1 { font-size: 22px; font-weight: 700; color: var(--gold-light); letter-spacing:.02em; margin-bottom:4px; }
+  .banner p { font-size: 13px; color: rgba(240,201,107,0.6); font-weight: 300; }
+  .gold-line { width:60px; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:12px auto 0; }
+
+  /* CONTAINER */
+  .container { width: 100%; max-width: 480px; padding: 1.5rem 1rem; }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp .3s ease; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 2px 16px rgba(201,146,42,0.08);
+  }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 600; letter-spacing:.08em;
+    color: var(--gold-dark); background: var(--gold-pale);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 4px 12px; margin-bottom: 1.25rem;
+  }
+
+  /* FORM */
+  .field { margin-bottom: 1.25rem; }
+  .field label { display:block; font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:500; }
+  .phone-input-wrap {
+    display:flex; align-items:center;
+    border:1.5px solid var(--border); border-radius:var(--radius-sm);
+    overflow:hidden; background:var(--surface); transition:border-color .2s;
+  }
+  .phone-input-wrap:focus-within { border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,146,42,0.12); }
+  .phone-prefix {
+    padding:0 12px; font-size:15px; color:var(--muted);
+    background:var(--gold-pale); height:48px;
+    display:flex; align-items:center;
+    border-right:1px solid var(--border); font-weight:500; white-space:nowrap;
+  }
+  .phone-input-wrap input {
+    flex:1; height:48px; padding:0 14px;
+    font-size:18px; font-weight:500;
+    border:none; outline:none;
+    background:transparent; color:var(--text);
+    font-family:'Noto Sans Lao',sans-serif; letter-spacing:.04em;
+  }
+  .phone-input-wrap input::placeholder { color:#C8B98A; font-size:14px; font-weight:400; letter-spacing:0; }
+
+  /* BUTTONS */
+  .btn {
+    width:100%; height:50px; border:none; border-radius:var(--radius-sm);
+    font-size:16px; font-weight:600; cursor:pointer;
+    font-family:'Noto Sans Lao',sans-serif; transition:all .15s;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .btn-gold { background:linear-gradient(135deg,#C9922A,#E8B84B); color:#fff; box-shadow:0 2px 10px rgba(201,146,42,0.35); }
+  .btn-gold:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(201,146,42,0.45); }
+  .btn-gold:active { transform:scale(0.98); }
+  .btn-gold:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+
+  /* MESSAGES */
+  .msg { font-size:13px; padding:10px 14px; border-radius:var(--radius-sm); margin-bottom:1rem; display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+  .msg.err { background:var(--red-bg); color:var(--red); border:1px solid #FADAD7; }
+  .msg.ok  { background:var(--green-bg); color:var(--green); border:1px solid #C2E8CF; }
+
+  /* BLOCKED SCREEN */
+  .blocked-wrap { text-align:center; padding:.5rem 0; }
+  .blocked-icon { font-size:56px; display:block; margin-bottom:1rem; animation:pop .4s cubic-bezier(.17,.67,.35,1.3); }
+  .blocked-wrap h2 { font-size:20px; font-weight:700; margin-bottom:8px; color:var(--red); }
+  .blocked-wrap .sub { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:1rem; }
+  .voted-badge-sm {
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg,#1A1208,#3D2A04);
+    color:var(--gold-light);
+    font-size:18px; font-weight:700;
+    padding:12px 28px; border-radius:50px;
+    margin:1rem 0;
+    box-shadow:0 4px 16px rgba(201,146,42,0.3);
+  }
+  .lock-notice {
+    font-size:12px; color:var(--muted);
+    background:var(--gold-pale); border:1px solid var(--border);
+    border-radius:var(--radius-sm); padding:10px 14px;
+    margin-top:1rem; line-height:1.6;
+  }
+
+  /* USER BAR */
+  .user-bar {
+    display:flex; align-items:center; gap:10px;
+    padding:10px 14px; background:var(--gold-pale);
+    border:1px solid var(--border); border-radius:var(--radius-sm); margin-bottom:1.25rem;
+  }
+  .user-bar .ph { font-size:15px; font-weight:600; color:var(--gold-dark); flex:1; }
+
+  /* VOTE GRID */
+  .vote-hint { font-size:13px; color:var(--muted); margin-bottom:1rem; display:flex; align-items:center; gap:6px; }
+  .vote-hint strong { color:var(--text); }
+  .num-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:1.25rem; }
+  .num-btn {
+    aspect-ratio:1;
+    border:1.5px solid var(--border); border-radius:10px;
+    background:var(--surface); font-size:15px; font-weight:600;
+    color:var(--text); cursor:pointer;
+    font-family:'Noto Sans Lao',sans-serif; transition:all .15s;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
+  }
+  .num-btn span { font-size:9px; font-weight:400; color:var(--muted); }
+  .num-btn:hover { border-color:var(--gold); background:var(--gold-pale); color:var(--gold-dark); }
+  .num-btn:hover span { color:var(--gold); }
+  .num-btn.selected {
+    border-color:var(--gold); border-width:2px;
+    background:linear-gradient(135deg,#FDF4DC,#FEF8EC);
+    color:var(--gold-dark);
+    box-shadow:0 0 0 3px rgba(201,146,42,0.12);
+    transform:scale(1.05);
+  }
+  .num-btn.selected span { color:var(--gold); }
+
+  /* SELECTED PREVIEW */
+  .selected-preview {
+    background:linear-gradient(135deg,#1A1208,#3D2A04);
+    border-radius:var(--radius-sm); padding:1.25rem; text-align:center;
+    margin-bottom:1.25rem; position:relative; overflow:hidden;
+  }
+  .selected-preview::before {
+    content:''; position:absolute; inset:0;
+    background:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(201,146,42,0.05) 10px,rgba(201,146,42,0.05) 11px);
+  }
+  .selected-preview .big-num { font-size:42px; font-weight:700; color:var(--gold-light); line-height:1; margin:4px 0 2px; }
+  .selected-preview p { font-size:12px; color:rgba(240,201,107,0.6); }
+
+  /* SUCCESS */
+  .success-wrap { text-align:center; padding:1rem 0; }
+  .success-wrap .big-emoji { font-size:64px; display:block; margin-bottom:1rem; animation:pop .4s cubic-bezier(.17,.67,.35,1.3); }
+  @keyframes pop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+  .success-wrap h2 { font-size:20px; font-weight:700; margin-bottom:8px; }
+  .success-wrap .sub { font-size:14px; color:var(--muted); margin-bottom:1.5rem; line-height:1.6; }
+  .voted-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg,#1A1208,#3D2A04);
+    color:var(--gold-light); font-size:20px; font-weight:700;
+    padding:14px 32px; border-radius:50px; margin-bottom:1.5rem;
+    box-shadow:0 4px 16px rgba(201,146,42,0.3);
+  }
+  .divider { height:1px; background:var(--border); margin:1.25rem 0; opacity:.5; }
+
+  /* LOADING */
+  .loading-overlay {
+    position:fixed; inset:0; background:rgba(26,18,8,0.6);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center; z-index:999;
+  }
+  .loading-overlay.hidden { display:none; }
+  .spinner {
+    width:44px; height:44px;
+    border:3px solid rgba(240,201,107,0.2);
+    border-top-color:var(--gold-light);
+    border-radius:50%; animation:spin .7s linear infinite; margin-bottom:14px;
+  }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .loading-overlay p { color:var(--gold-light); font-size:14px; }
+</style>
+</head>
+<body>
+
+<!-- LOADING OVERLAY -->
+<div id="loading" class="loading-overlay hidden">
+  <div class="spinner"></div>
+  <p>ກຳລັງບັນທຶກຂໍ້ມູນ...</p>
+</div>
+
+<!-- BANNER -->
+<div class="banner">
+  <span class="banner-crown">👑</span>
+  <h1>ໂຫວດລາງວັນຂວັນໃຈ</h1>
+  <p>ເລືອກຜູ້ແຂ່ງຂັນທີ່ທ່ານມັກທີ່ສຸດ</p>
+  <div class="gold-line"></div>
+</div>
+
+<div class="container">
+
+  <!-- SCREEN 1: LOGIN -->
+  <div id="s-login" class="screen active">
+    <div class="card">
+      <div class="section-label">📱 ເຂົ້າສູ່ລະບົບ</div>
+      <div id="login-msg"></div>
+      <div class="field">
+        <label>ໃສ່ເບີໂທລະສັບຂອງທ່ານ</label>
+        <div class="phone-input-wrap">
+          <div class="phone-prefix">🇱🇦 +856</div>
+          <input id="inp-phone" type="tel" inputmode="numeric" maxlength="10"
+            placeholder="20 XXXX XXXX"
+            onkeypress="return /[0-9]/.test(event.key)"
+            onkeydown="if(event.key==='Enter')doLogin()" />
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="doLogin()">✨ ເຂົ້າໂຫວດເລີຍ</button>
+      <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;">
+        ເບີໂທຈະໃຊ້ເປັນ ID · ໂຫວດໄດ້ <strong>1 ສຽງ</strong> ເທົ່ານັ້ນ
+      </p>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: BLOCKED (already voted) -->
+  <div id="s-blocked" class="screen">
+    <div class="card">
+      <div class="blocked-wrap">
+        <span class="blocked-icon">🔒</span>
+        <h2>ໄດ້ໂຫວດແລ້ວ!</h2>
+        <p class="sub">
+          ເບີ <strong id="b-phone"></strong><br>
+          ໄດ້ໃຊ້ສຽງໂຫວດໄປແລ້ວ<br>
+          ບໍ່ສາມາດໂຫວດໄດ້ອີກ
+        </p>
+        <div class="voted-badge-sm">👑 &nbsp; No. <span id="b-num"></span></div>
+        <p style="font-size:14px;color:var(--muted);">ຂໍຂອບໃຈທີ່ເຂົ້າຮ່ວມໂຫວດ ❤️</p>
+        <div class="lock-notice">
+          🔐 ອຸປະກອນ ແລະ ເບີໂທນີ້ຖືກລ໋ອກຖາວອນ<br>ບໍ່ສາມາດໂຫວດຊ້ຳ ຫຼື ໃຊ້ເບີອື່ນໄດ້
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: VOTE -->
+  <div id="s-vote" class="screen">
+    <div class="card">
+      <div class="section-label">🗳️ ໂຫວດ</div>
+      <div class="user-bar">
+        <span>📱</span>
+        <span class="ph" id="disp-phone"></span>
+      </div>
+      <p class="vote-hint">🌟 ເລືອກ <strong>1 ໝາຍເລກ</strong> ທີ່ທ່ານຢາກໃຫ້ຊະນະ</p>
+      <div class="num-grid" id="num-grid"></div>
+      <div id="sel-preview" style="display:none">
+        <div class="selected-preview">
+          <span>👑</span>
+          <div class="big-num" id="sel-num"></div>
+          <p>ຜູ້ແຂ່ງຂັນທີ່ທ່ານເລືອກ</p>
+        </div>
+      </div>
+      <div id="vote-msg"></div>
+      <button class="btn btn-gold" id="btn-submit" onclick="doVote()" disabled>
+        ✅ ຢືນຢັນການໂຫວດ
+      </button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: SUCCESS -->
+  <div id="s-done" class="screen">
+    <div class="card">
+      <div class="success-wrap">
+        <span class="big-emoji">🎉</span>
+        <h2>ຂອບໃຈສຳລັບການໂຫວດ!</h2>
+        <p class="sub">ສຽງໂຫວດຂອງທ່ານໄດ້ຮັບການບັນທຶກໃນ Google Sheet ແລ້ວ</p>
+        <div class="voted-badge">👑 &nbsp; No. <span id="done-num"></span></div>
+        <p style="font-size:14px;">ເບີ <strong id="done-phone"></strong><br>ໂຫວດ 1 ສຽງ ✓</p>
+        <div class="divider"></div>
+        <div class="lock-notice">
+          🔐 ອຸປະກອນ ແລະ ເບີໂທນີ້ຖືກລ໋ອກຖາວອນແລ້ວ<br>ບໍ່ສາມາດໂຫວດໄດ້ອີກ
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyTzWPnbKwd2oPtb7FdmXoora4FZk-J3VEmXVR5Q8q5imOhlAZqJT_ZuRjsoR7zyF0k/exec';
+  const TOTAL = 20;
+  const STORAGE_KEY = 'vkj_lock_v1';
+
+  let selected = null;
+  let currentPhone = null;
+
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
+  }
+  function showMsg(elId, text, type) {
+    const el = document.getElementById(elId);
+    el.innerHTML = text ? `<div class="msg ${type}">${text}</div>` : '';
+  }
+  function setLoading(on) {
+    document.getElementById('loading').classList.toggle('hidden', !on);
+  }
+  function fmtPhone(p) {
+    return '0' + p.replace(/^0+/, '');
+  }
+
+  // ─── localStorage: device lock ───
+  function getLock() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
+  }
+  function setLock(phone, num) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ phone, num, ts: Date.now() }));
+  }
+
+  // ─── on load: if device already voted → show blocked immediately ───
+  window.onload = () => {
+    const lock = getLock();
+    if (lock) {
+      showBlocked(lock.phone, lock.num);
+    } else {
+      show('s-login');
+      setTimeout(() => document.getElementById('inp-phone').focus(), 300);
+    }
+  };
+
+  function showBlocked(phone, num) {
+    document.getElementById('b-phone').textContent = fmtPhone(phone);
+    document.getElementById('b-num').textContent = num;
+    show('s-blocked');
+  }
+
+  // ─── login ───
+  function doLogin() {
+    // If device is locked → show blocked, ignore phone input entirely
+    const lock = getLock();
+    if (lock) { showBlocked(lock.phone, lock.num); return; }
+
+    const raw = document.getElementById('inp-phone').value.trim().replace(/\s+/g, '');
+    if (!raw || raw.length < 8) {
+      return showMsg('login-msg', '⚠️ ກະລຸນາໃສ່ເບີໂທທີ່ຖືກຕ້ອງ (ຢ່າງໜ້ອຍ 8 ຕົວ)', 'err');
+    }
+    showMsg('login-msg', '', '');
+    currentPhone = raw;
+    document.getElementById('disp-phone').textContent = fmtPhone(raw);
+    selected = null;
+    buildGrid();
+    document.getElementById('sel-preview').style.display = 'none';
+    document.getElementById('btn-submit').disabled = true;
+    showMsg('vote-msg', '', '');
+    show('s-vote');
+  }
+
+  // ─── build number grid ───
+  function buildGrid() {
+    const g = document.getElementById('num-grid');
+    g.innerHTML = '';
+    for (let i = 1; i <= TOTAL; i++) {
+      const b = document.createElement('button');
+      b.className = 'num-btn';
+      b.id = 'nb' + i;
+      b.innerHTML = i + '<span>No.' + i + '</span>';
+      b.onclick = () => selectNum(i);
+      g.appendChild(b);
+    }
+  }
+
+  function selectNum(n) {
+    if (selected) { const p = document.getElementById('nb' + selected); if (p) p.classList.remove('selected'); }
+    selected = n;
+    document.getElementById('nb' + n).classList.add('selected');
+    document.getElementById('sel-num').textContent = 'No. ' + n;
+    document.getElementById('sel-preview').style.display = 'block';
+    document.getElementById('btn-submit').disabled = false;
+    showMsg('vote-msg', '', '');
+  }
+
+  // ─── submit ───
+  async function doVote() {
+    if (selected === null || !currentPhone) return;
+
+    // Last-second check
+    const lock = getLock();
+    if (lock) { showBlocked(lock.phone, lock.num); return; }
+
+    setLoading(true);
+    document.getElementById('btn-submit').disabled = true;
+
+    const phone = fmtPhone(currentPhone);
+    const payload = {
+      phone,
+      number: selected,
+      ts: new Date().toLocaleString('lo-LA', { timeZone: 'Asia/Vientiane' })
+    };
+
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      // no-cors means we can't read response, but request was sent
+    }
+
+    // Lock device immediately regardless
+    setLock(currentPhone, selected);
+    setLoading(false);
+
+    document.getElementById('done-num').textContent = selected;
+    document.getElementById('done-phone').textContent = phone;
+    show('s-done');
+  }
+</script>
+</body>
+</html>
