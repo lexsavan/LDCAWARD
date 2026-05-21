@@ -7,85 +7,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #C9922A;
-    --gold-light: #E8A830;
-    --gold-pale: #FDF4DC;
-    --gold-dark: #8B5E0A;
-    --bg: #F8F5EE;
-    --surface: #FFFFFF;
-    --surface2: #F0EBE0;
-    --border: #E2D5B8;
-    --text: #2C1F08;
-    --muted: #8B7A50;
-    --green: #2E7D32;
-    --red: #C62828;
-    --radius: 14px;
-    --radius-sm: 10px;
+    --gold: #C9922A; --gold-light: #E8A830; --gold-pale: #FDF4DC;
+    --gold-dark: #8B5E0A; --bg: #F8F5EE; --surface: #FFFFFF;
+    --surface2: #F0EBE0; --border: #E2D5B8; --text: #2C1F08;
+    --muted: #8B7A50; --green: #2E7D32; --red: #C62828;
+    --radius: 14px; --radius-sm: 10px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Noto Sans Lao', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: 3rem;
-  }
+  body { font-family: 'Noto Sans Lao', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 3rem; }
 
   /* HEADER */
-  .header {
-    background: linear-gradient(135deg, #2C1F08, #6B4A0E, #2C1F08);
-    padding: 1.25rem 1.5rem 1rem;
-    text-align: center;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  }
+  .header { background: linear-gradient(135deg, #2C1F08, #6B4A0E, #2C1F08); padding: 1.25rem 1.5rem 1rem; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
   .header h1 { font-size: 20px; font-weight: 700; color: #F0C96B; margin-bottom: 6px; }
   .header-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
-  .live-dot {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12px; color: #81C784; font-weight: 600;
-  }
-  .live-dot::before {
-    content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: #4CAF50; animation: pulse 1.5s ease infinite;
-  }
+  .live-dot { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #81C784; font-weight: 600; }
+  .live-dot::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #4CAF50; animation: pulse 1.5s ease infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
   .last-update { font-size: 11px; color: rgba(240,201,107,0.7); }
 
-  /* STATS BAR */
-  .stats-bar {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--border);
-    border-bottom: 2px solid var(--border);
-  }
+  /* STATS */
+  .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-bottom: 2px solid var(--border); }
   .stat-box { background: var(--surface); padding: 1rem; text-align: center; }
   .stat-box .val { font-size: 32px; font-weight: 700; color: var(--gold); line-height: 1; }
   .stat-box .lbl { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
-  /* CONTAINER */
   .container { max-width: 640px; margin: 0 auto; padding: 1.25rem 1rem; }
-
-  /* SECTION TITLE */
-  .sec-title {
-    font-size: 13px; font-weight: 600; color: var(--gold-dark);
-    letter-spacing: .06em; margin-bottom: .75rem;
-    display: flex; align-items: center; gap: 8px;
-  }
+  .sec-title { font-size: 13px; font-weight: 600; color: var(--gold-dark); letter-spacing: .06em; margin-bottom: .75rem; display: flex; align-items: center; gap: 8px; }
   .sec-title::after { content:''; flex:1; height:1.5px; background: var(--border); }
 
   /* PODIUM */
   .podium { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; align-items: end; }
-  .podium-item {
-    border-radius: var(--radius-sm); padding: .85rem .5rem;
-    text-align: center; border: 1.5px solid var(--border);
-    background: var(--surface);
-  }
-  .podium-item.rank-1 {
-    background: linear-gradient(180deg, #FDF4DC, #FFF8EE);
-    border-color: var(--gold); border-width: 2px;
-    box-shadow: 0 4px 16px rgba(201,146,42,0.2);
-    order: 2;
-  }
+  .podium-item { border-radius: var(--radius-sm); padding: .85rem .5rem; text-align: center; border: 1.5px solid var(--border); background: var(--surface); }
+  .podium-item.rank-1 { background: linear-gradient(180deg, #FDF4DC, #FFF8EE); border-color: var(--gold); border-width: 2px; box-shadow: 0 4px 16px rgba(201,146,42,0.2); order: 2; }
   .podium-item.rank-2 { order: 1; background: #F8F8F8; border-color: #B0B0B0; }
   .podium-item.rank-3 { order: 3; background: #FDF5EC; border-color: #C8860A; }
   .podium-medal { font-size: 24px; display: block; margin-bottom: 4px; }
@@ -96,64 +49,121 @@
 
   /* LIST */
   .vote-list { display: flex; flex-direction: column; gap: 8px; }
-  .vote-item {
-    background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm); padding: 10px 14px;
-    display: flex; align-items: center; gap: 12px;
-    transition: all .3s;
-  }
-  .vote-item.top1 { border-color: var(--gold); background: linear-gradient(90deg, #FDF4DC, #fff); box-shadow: 0 2px 8px rgba(201,146,42,0.15); }
-  .vote-item.top2 { border-color: #9E9E9E; background: linear-gradient(90deg, #F5F5F5, #fff); }
-  .vote-item.top3 { border-color: #C8860A; background: linear-gradient(90deg, #FDF5EC, #fff); }
-  .rank-badge {
-    width: 30px; height: 30px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; flex-shrink: 0;
-    background: var(--surface2); color: var(--muted);
-  }
+  .vote-item { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; display: flex; align-items: center; gap: 12px; transition: all .3s; }
+  .vote-item.top1 { border-color: var(--gold); background: linear-gradient(90deg,#FDF4DC,#fff); box-shadow: 0 2px 8px rgba(201,146,42,0.15); }
+  .vote-item.top2 { border-color: #9E9E9E; background: linear-gradient(90deg,#F5F5F5,#fff); }
+  .vote-item.top3 { border-color: #C8860A; background: linear-gradient(90deg,#FDF5EC,#fff); }
+  .rank-badge { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; background: var(--surface2); color: var(--muted); }
   .vote-item.top1 .rank-badge { background: var(--gold); color: #fff; }
   .vote-item.top2 .rank-badge { background: #757575; color: #fff; }
   .vote-item.top3 .rank-badge { background: #A0610A; color: #fff; }
   .item-num { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; }
   .item-count { font-size: 13px; color: var(--muted); margin-right: 8px; white-space: nowrap; font-weight: 500; }
   .bar-wrap { flex: 2; height: 7px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
-  .bar-fill {
-    height: 100%; border-radius: 4px;
-    background: linear-gradient(90deg, #E8A830, #F0C96B);
-    transition: width .8s ease;
-    min-width: 0;
-  }
-  .vote-item.top1 .bar-fill { background: linear-gradient(90deg, var(--gold), #F0C96B); }
+  .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg,#E8A830,#F0C96B); transition: width .8s ease; }
+  .vote-item.top1 .bar-fill { background: linear-gradient(90deg,var(--gold),#F0C96B); }
   .zero { opacity: .4; }
-
-  /* EMPTY / ERROR */
   .empty { text-align: center; padding: 2.5rem 1rem; color: var(--muted); }
   .empty .icon { font-size: 36px; display: block; margin-bottom: 10px; }
 
   /* REFRESH BTN */
-  .refresh-btn {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    margin: 1.5rem auto 0; padding: 10px 28px;
-    background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: 50px; color: var(--muted);
-    font-size: 13px; cursor: pointer;
-    font-family: 'Noto Sans Lao', sans-serif;
-    transition: all .15s; font-weight: 500;
-  }
+  .refresh-btn { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 1.5rem auto 0; padding: 10px 28px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 50px; color: var(--muted); font-size: 13px; cursor: pointer; font-family: 'Noto Sans Lao', sans-serif; transition: all .15s; font-weight: 500; }
   .refresh-btn:hover { border-color: var(--gold); color: var(--gold-dark); background: var(--gold-pale); }
   .spin { animation: spin .7s linear infinite; display: inline-block; }
   @keyframes spin { to{transform:rotate(360deg)} }
 
-  /* RESET BTN */
-  .reset-section {
-    margin-top: 2rem; padding: 1rem 1.25rem;
+  /* ── ADMIN PANEL ── */
+  .admin-toggle {
+    position: fixed; bottom: 18px; left: 18px;
+    width: 44px; height: 44px; border-radius: 50%;
     background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: var(--radius); text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-size: 22px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200; transition: all .15s;
   }
-  .reset-section p { font-size: 12px; color: var(--muted); margin-bottom: .75rem; }
+  .admin-toggle:hover { border-color: var(--red); box-shadow: 0 4px 14px rgba(198,40,40,0.2); transform: scale(1.1); }
+
+  .admin-panel {
+    margin-top: 1rem;
+    background: var(--surface);
+    border: 1.5px solid #FADAD7;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: none;
+  }
+  .admin-panel.open { display: block; animation: fadeUp .25s ease; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  .admin-panel h3 { font-size: 15px; font-weight: 700; color: var(--red); margin-bottom: .5rem; }
+  .admin-panel p { font-size: 12px; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
+
+  .pw-wrap { display: flex; gap: 8px; margin-bottom: 1rem; }
+  .pw-wrap input {
+    flex: 1; height: 42px; padding: 0 14px;
+    border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+    font-size: 15px; font-family: 'Noto Sans Lao', sans-serif;
+    outline: none; color: var(--text); background: var(--bg);
+  }
+  .pw-wrap input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(198,40,40,0.08); }
+
+  .btn-reset {
+    width: 100%; height: 46px; border: none;
+    background: linear-gradient(135deg, #C62828, #E53935);
+    color: #fff; border-radius: var(--radius-sm);
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    font-family: 'Noto Sans Lao', sans-serif;
+    transition: all .15s; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-reset:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(198,40,40,0.35); }
+  .btn-reset:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  .admin-msg { font-size: 13px; padding: 10px 14px; border-radius: var(--radius-sm); margin-top: .75rem; display: none; }
+  .admin-msg.err { background: #FFEBEE; color: var(--red); border: 1px solid #FFCDD2; display: block; }
+  .admin-msg.ok  { background: #E8F5E9; color: var(--green); border: 1px solid #C8E6C9; display: block; }
+
+  .warn-box {
+    background: #FFF8E1; border: 1px solid #FFD54F;
+    border-radius: var(--radius-sm); padding: 10px 14px;
+    font-size: 12px; color: #7B6000; margin-bottom: 1rem; line-height: 1.6;
+  }
+
+  /* CONFIRM MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999; padding: 1rem;
+  }
+  .modal-overlay.hidden { display: none; }
+  .modal {
+    background: var(--surface); border-radius: var(--radius);
+    padding: 1.75rem 1.5rem; max-width: 360px; width: 100%;
+    text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    animation: pop .25s cubic-bezier(.17,.67,.35,1.3);
+  }
+  @keyframes pop { from{transform:scale(.85);opacity:0} to{transform:scale(1);opacity:1} }
+  .modal .icon { font-size: 48px; display: block; margin-bottom: 12px; }
+  .modal h3 { font-size: 18px; font-weight: 700; color: var(--red); margin-bottom: 8px; }
+  .modal p { font-size: 13px; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.6; }
+  .modal-btns { display: flex; gap: 10px; }
+  .btn-cancel { flex: 1; height: 44px; border: 1.5px solid var(--border); background: var(--surface); border-radius: var(--radius-sm); font-size: 14px; cursor: pointer; font-family: 'Noto Sans Lao', sans-serif; color: var(--muted); }
+  .btn-confirm { flex: 1; height: 44px; border: none; background: linear-gradient(135deg,#C62828,#E53935); color: #fff; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Noto Sans Lao', sans-serif; }
 </style>
 </head>
 <body>
+
+<!-- CONFIRM MODAL -->
+<div id="modal" class="modal-overlay hidden">
+  <div class="modal">
+    <span class="icon">⚠️</span>
+    <h3>ຢືນຢັນການ Reset</h3>
+    <p>ຂໍ້ມູນໂຫວດ <strong>ທັງໝົດ</strong> ຈະຖືກລຶບຖາວອນ<br>ບໍ່ສາມາດກູ້ຄືນໄດ້!</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">ຍົກເລີກ</button>
+      <button class="btn-confirm" onclick="doReset()">🗑️ Reset ເລີຍ</button>
+    </div>
+  </div>
+</div>
 
 <div class="header">
   <h1>👑 ຜົນໂຫວດຂວັນໃຈ</h1>
@@ -164,22 +174,12 @@
 </div>
 
 <div class="stats-bar">
-  <div class="stat-box">
-    <div class="val" id="stat-total">-</div>
-    <div class="lbl">ສຽງທັງໝົດ</div>
-  </div>
-  <div class="stat-box">
-    <div class="val" id="stat-nums">-</div>
-    <div class="lbl">ໝາຍເລກທີ່ໄດ້ສຽງ</div>
-  </div>
-  <div class="stat-box">
-    <div class="val" id="stat-lead">-</div>
-    <div class="lbl">ໜ້ານຳ No.</div>
-  </div>
+  <div class="stat-box"><div class="val" id="stat-total">-</div><div class="lbl">ສຽງທັງໝົດ</div></div>
+  <div class="stat-box"><div class="val" id="stat-nums">-</div><div class="lbl">ໝາຍເລກທີ່ໄດ້ສຽງ</div></div>
+  <div class="stat-box"><div class="val" id="stat-lead">-</div><div class="lbl">ໜ້ານຳ No.</div></div>
 </div>
 
 <div class="container">
-
   <div class="sec-title">🏆 TOP 3</div>
   <div class="podium" id="podium">
     <div style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:1rem;">ກຳລັງໂຫຼດ...</div>
@@ -194,18 +194,31 @@
     <span id="spin-icon">🔄</span> ໂຫຼດໃໝ່
   </button>
 
-  <div class="reset-section">
-    <p>⚠️ ສຳລັບ Admin — Reset ຂໍ້ມູນໂຫວດທັງໝົດ (ລັນໃນ Supabase SQL Editor)</p>
-    <code style="font-size:13px;background:var(--surface2);padding:6px 16px;border-radius:6px;display:inline-block;color:var(--red);">TRUNCATE TABLE votes;</code>
-  </div>
+  <!-- ADMIN SECTION -->
+  <button class="admin-toggle" onclick="toggleAdmin()">🔐</button>
 
+  <div class="admin-panel" id="admin-panel">
+    <h3>🛡️ Admin Reset</h3>
+    <div class="warn-box">
+      ⚠️ Reset ຈະລຶບຂໍ້ມູນໂຫວດທັງໝົດໃນ Supabase<br>
+      ແຕ່ <strong>localStorage ໃນໂທຜູ້ໃຊ້ຍັງຢູ່</strong> — ຜູ້ທີ່ເຄີຍໂຫວດຕ້ອງລ້າງ cache ເອງ ຫຼື ໃຊ້ browser ໃໝ່
+    </div>
+    <p>ໃສ່ລະຫັດຜ່ານ Admin ກ່ອນ Reset:</p>
+    <div class="pw-wrap">
+      <input id="admin-pw" type="password" placeholder="ລະຫັດຜ່ານ Admin" onkeydown="if(event.key==='Enter')checkPw()" />
+    </div>
+    <button class="btn-reset" onclick="checkPw()">🗑️ Reset ຂໍ້ມູນທັງໝົດ</button>
+    <div id="admin-msg" class="admin-msg"></div>
+  </div>
 </div>
 
 <script>
   const SUPABASE_URL = 'https://ywrrttsyhqvtfbnzkqqp.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3cnJ0dHN5aHF2dGZibnprcXFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMDQ5NzQsImV4cCI6MjA5NDc4MDk3NH0.ePOwhkVXeXBqONJOh5bjgQII0TQxjh3O3E0SVQUkQIY';
   const TOTAL = 30;
+  const ADMIN_PW = 'LDC2025'; // ← ປ່ຽນລະຫັດໄດ້ຕາມຕ້ອງການ
 
+  // ─── FETCH ───
   async function fetchVotes() {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/votes?select=number&limit=10000`,
@@ -215,6 +228,22 @@
     return await res.json();
   }
 
+  async function deleteAllVotes() {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/votes?id=gte.0`,
+      {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return res.ok || res.status === 204;
+  }
+
+  // ─── RESULTS ───
   function buildResults(rows) {
     const counts = {};
     for (let i = 1; i <= TOTAL; i++) counts[i] = 0;
@@ -226,72 +255,111 @@
 
   function renderPodium(sorted) {
     const el = document.getElementById('podium');
-    const top3 = sorted.slice(0, 3);
-    if (top3.every(t => t.votes === 0)) {
+    if (sorted.every(t => t.votes === 0)) {
       el.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:1.5rem;">ຍັງບໍ່ມີຜົນໂຫວດ</div>';
       return;
     }
-    const medals = ['🥇','🥈','🥉'];
-    const cls = ['rank-1','rank-2','rank-3'];
-    el.innerHTML = top3.map((item, i) => `
+    const medals = ['🥇','🥈','🥉'], cls = ['rank-1','rank-2','rank-3'];
+    el.innerHTML = sorted.slice(0,3).map((item, i) => `
       <div class="podium-item ${cls[i]}">
         <span class="podium-medal">${medals[i]}</span>
         <div class="podium-num">No.${item.num}</div>
         <div class="podium-votes">${item.votes} ສຽງ</div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
   function renderList(sorted, total) {
     const el = document.getElementById('vote-list');
-    if (total === 0) {
-      el.innerHTML = '<div class="empty"><span class="icon">🗳️</span>ຍັງບໍ່ມີການໂຫວດ</div>';
-      return;
-    }
+    if (total === 0) { el.innerHTML = '<div class="empty"><span class="icon">🗳️</span>ຍັງບໍ່ມີການໂຫວດ</div>'; return; }
     const max = sorted[0]?.votes || 1;
-    const rankCls = i => i===0?'top1':i===1?'top2':i===2?'top3':'';
+    const rc = i => i===0?'top1':i===1?'top2':i===2?'top3':'';
     el.innerHTML = sorted.map((item, i) => {
       const pct = max > 0 ? (item.votes / max * 100).toFixed(1) : 0;
-      return `
-        <div class="vote-item ${rankCls(i)} ${item.votes===0?'zero':''}">
-          <div class="rank-badge">${i+1}</div>
-          <div class="item-num">No.${item.num}</div>
-          <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div>
-          <div class="item-count">${item.votes} ສຽງ</div>
-        </div>`;
+      return `<div class="vote-item ${rc(i)} ${item.votes===0?'zero':''}">
+        <div class="rank-badge">${i+1}</div>
+        <div class="item-num">No.${item.num}</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div>
+        <div class="item-count">${item.votes} ສຽງ</div>
+      </div>`;
     }).join('');
   }
 
   function renderStats(sorted, total) {
-    const withVotes = sorted.filter(s => s.votes > 0).length;
     const leader = sorted[0];
     document.getElementById('stat-total').textContent = total;
-    document.getElementById('stat-nums').textContent = withVotes;
+    document.getElementById('stat-nums').textContent = sorted.filter(s => s.votes > 0).length;
     document.getElementById('stat-lead').textContent = leader?.votes > 0 ? leader.num : '-';
   }
 
   async function loadData() {
     const btn = document.getElementById('refresh-btn');
     const icon = document.getElementById('spin-icon');
-    btn.disabled = true;
-    icon.classList.add('spin');
+    btn.disabled = true; icon.classList.add('spin');
     try {
       const rows = await fetchVotes();
       const sorted = buildResults(rows);
-      const total = rows.length;
-      renderStats(sorted, total);
+      renderStats(sorted, rows.length);
       renderPodium(sorted);
-      renderList(sorted, total);
-      const now = new Date().toLocaleTimeString('lo-LA', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+      renderList(sorted, rows.length);
+      const now = new Date().toLocaleTimeString('lo-LA', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
       document.getElementById('last-update').textContent = `ອັບເດດ: ${now}`;
     } catch(e) {
-      document.getElementById('vote-list').innerHTML =
-        '<div class="empty"><span class="icon">❌</span>ບໍ່ສາມາດໂຫຼດຂໍ້ມູນ ກະລຸນາລອງໃໝ່</div>';
+      document.getElementById('vote-list').innerHTML = '<div class="empty"><span class="icon">❌</span>ບໍ່ສາມາດໂຫຼດຂໍ້ມູນ ກະລຸນາລອງໃໝ່</div>';
     }
-    icon.classList.remove('spin');
-    btn.disabled = false;
+    icon.classList.remove('spin'); btn.disabled = false;
   }
 
+  // ─── ADMIN ───
+  function toggleAdmin() {
+    const p = document.getElementById('admin-panel');
+    p.classList.toggle('open');
+    if (p.classList.contains('open')) document.getElementById('admin-pw').focus();
+  }
+
+  function showAdminMsg(text, type) {
+    const el = document.getElementById('admin-msg');
+    el.textContent = text;
+    el.className = 'admin-msg ' + type;
+  }
+
+  function checkPw() {
+    const pw = document.getElementById('admin-pw').value.trim();
+    if (!pw) return showAdminMsg('⚠️ ກະລຸນາໃສ່ລະຫັດຜ່ານ', 'err');
+    if (pw !== ADMIN_PW) return showAdminMsg('❌ ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ', 'err');
+    showAdminMsg('', '');
+    document.getElementById('modal').classList.remove('hidden');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+    document.getElementById('admin-pw').value = '';
+  }
+
+  async function doReset() {
+    closeModal();
+    const btn = document.querySelector('.btn-reset');
+    btn.disabled = true;
+    btn.textContent = 'ກຳລັງ Reset...';
+    try {
+      const ok = await deleteAllVotes();
+      if (ok) {
+        showAdminMsg('✅ Reset ສຳເລັດ! ຂໍ້ມູນໂຫວດທັງໝົດຖືກລຶບແລ້ວ', 'ok');
+        await loadData();
+      } else {
+        showAdminMsg('❌ Reset ບໍ່ສຳເລັດ ກະລຸນາລອງໃໝ່', 'err');
+      }
+    } catch(e) {
+      showAdminMsg('❌ ເກີດຂໍ້ຜິດພາດ: ' + e.message, 'err');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '🗑️ Reset ຂໍ້ມູນທັງໝົດ';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+  }
+
+  // ─── INIT ───
   loadData();
   setInterval(loadData, 15000);
 </script>
