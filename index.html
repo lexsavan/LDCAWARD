@@ -120,7 +120,7 @@
   .msg.err { background:var(--red-bg); color:var(--red); border:1px solid #FADAD7; }
   .msg.ok  { background:var(--green-bg); color:var(--green); border:1px solid #C2E8CF; }
 
-  /* BLOCKED */
+  /* BLOCKED SCREEN */
   .blocked-wrap { text-align:center; padding:.5rem 0; }
   .blocked-icon { font-size:56px; display:block; margin-bottom:1rem; animation:pop .4s cubic-bezier(.17,.67,.35,1.3); }
   .blocked-wrap h2 { font-size:20px; font-weight:700; margin-bottom:8px; color:var(--red); }
@@ -128,8 +128,10 @@
   .voted-badge-sm {
     display:inline-flex; align-items:center; gap:8px;
     background:linear-gradient(135deg,#1A1208,#3D2A04);
-    color:var(--gold-light); font-size:18px; font-weight:700;
-    padding:12px 28px; border-radius:50px; margin:1rem 0;
+    color:var(--gold-light);
+    font-size:18px; font-weight:700;
+    padding:12px 28px; border-radius:50px;
+    margin:1rem 0;
     box-shadow:0 4px 16px rgba(201,146,42,0.3);
   }
   .lock-notice {
@@ -152,9 +154,11 @@
   .vote-hint strong { color:var(--text); }
   .num-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:1.25rem; }
   .num-btn {
-    aspect-ratio:1; border:1.5px solid var(--border); border-radius:10px;
-    background:var(--surface); font-size:15px; font-weight:600; color:var(--text);
-    cursor:pointer; font-family:'Noto Sans Lao',sans-serif; transition:all .15s;
+    aspect-ratio:1;
+    border:1.5px solid var(--border); border-radius:10px;
+    background:var(--surface); font-size:15px; font-weight:600;
+    color:var(--text); cursor:pointer;
+    font-family:'Noto Sans Lao',sans-serif; transition:all .15s;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
   }
   .num-btn span { font-size:9px; font-weight:400; color:var(--muted); }
@@ -162,8 +166,10 @@
   .num-btn:hover span { color:var(--gold); }
   .num-btn.selected {
     border-color:var(--gold); border-width:2px;
-    background:linear-gradient(135deg,#FDF4DC,#FEF8EC); color:var(--gold-dark);
-    box-shadow:0 0 0 3px rgba(201,146,42,0.12); transform:scale(1.05);
+    background:linear-gradient(135deg,#FDF4DC,#FEF8EC);
+    color:var(--gold-dark);
+    box-shadow:0 0 0 3px rgba(201,146,42,0.12);
+    transform:scale(1.05);
   }
   .num-btn.selected span { color:var(--gold); }
 
@@ -204,7 +210,8 @@
   .loading-overlay.hidden { display:none; }
   .spinner {
     width:44px; height:44px;
-    border:3px solid rgba(240,201,107,0.2); border-top-color:var(--gold-light);
+    border:3px solid rgba(240,201,107,0.2);
+    border-top-color:var(--gold-light);
     border-radius:50%; animation:spin .7s linear infinite; margin-bottom:14px;
   }
   @keyframes spin { to{transform:rotate(360deg)} }
@@ -213,10 +220,10 @@
 </head>
 <body>
 
-<!-- LOADING -->
+<!-- LOADING OVERLAY -->
 <div id="loading" class="loading-overlay hidden">
   <div class="spinner"></div>
-  <p id="loading-text">ກຳລັງກວດສອບ...</p>
+  <p>ກຳລັງບັນທຶກຂໍ້ມູນ...</p>
 </div>
 
 <!-- BANNER -->
@@ -251,17 +258,21 @@
     </div>
   </div>
 
-  <!-- SCREEN 2: BLOCKED -->
+  <!-- SCREEN 2: BLOCKED (already voted) -->
   <div id="s-blocked" class="screen">
     <div class="card">
       <div class="blocked-wrap">
         <span class="blocked-icon">🔒</span>
         <h2>ໄດ້ໂຫວດແລ້ວ!</h2>
-        <p class="sub">ເບີ <strong id="b-phone"></strong><br>ໄດ້ໃຊ້ສຽງໂຫວດໄປແລ້ວ<br>ບໍ່ສາມາດໂຫວດໄດ້ອີກ</p>
+        <p class="sub">
+          ເບີ <strong id="b-phone"></strong><br>
+          ໄດ້ໃຊ້ສຽງໂຫວດໄປແລ້ວ<br>
+          ບໍ່ສາມາດໂຫວດໄດ້ອີກ
+        </p>
         <div class="voted-badge-sm">👑 &nbsp; No. <span id="b-num"></span></div>
         <p style="font-size:14px;color:var(--muted);">ຂໍຂອບໃຈທີ່ເຂົ້າຮ່ວມໂຫວດ ❤️</p>
         <div class="lock-notice">
-          🔐 ເບີໂທນີ້ຖືກລ໋ອກໃນລະບົບຖາວອນແລ້ວ<br>ບໍ່ສາມາດໂຫວດຊ້ຳໄດ້ ບໍ່ວ່າຈະໃຊ້ browser ໃດ
+          🔐 ອຸປະກອນ ແລະ ເບີໂທນີ້ຖືກລ໋ອກຖາວອນ<br>ບໍ່ສາມາດໂຫວດຊ້ຳ ຫຼື ໃຊ້ເບີອື່ນໄດ້
         </div>
       </div>
     </div>
@@ -297,12 +308,12 @@
       <div class="success-wrap">
         <span class="big-emoji">🎉</span>
         <h2>ຂອບໃຈສຳລັບການໂຫວດ!</h2>
-        <p class="sub">ສຽງໂຫວດຂອງທ່ານໄດ້ຮັບການບັນທຶກໃນລະບົບແລ້ວ</p>
+        <p class="sub">ສຽງໂຫວດຂອງທ່ານໄດ້ຮັບການບັນທຶກໃນ Google Sheet ແລ້ວ</p>
         <div class="voted-badge">👑 &nbsp; No. <span id="done-num"></span></div>
         <p style="font-size:14px;">ເບີ <strong id="done-phone"></strong><br>ໂຫວດ 1 ສຽງ ✓</p>
         <div class="divider"></div>
         <div class="lock-notice">
-          🔐 ເບີໂທນີ້ຖືກລ໋ອກໃນ database ຖາວອນແລ້ວ<br>ບໍ່ສາມາດໂຫວດໄດ້ອີກ ບໍ່ວ່າຈະໃຊ້ browser / ໂທໃດ
+          🔐 ອຸປະກອນ ແລະ ເບີໂທນີ້ຖືກລ໋ອກຖາວອນແລ້ວ<br>ບໍ່ສາມາດໂຫວດໄດ້ອີກ
         </div>
       </div>
     </div>
@@ -311,15 +322,13 @@
 </div>
 
 <script>
-  const SUPABASE_URL = 'https://ywrrttsyhqvtfbnzkqqp.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3cnJ0dHN5aHF2dGZibnprcXFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMDQ5NzQsImV4cCI6MjA5NDc4MDk3NH0.ePOwhkVXeXBqONJOh5bjgQII0TQxjh3O3E0SVQUkQIY';
-  const TOTAL = 20;
-  const LOCAL_KEY = 'vkj_sb_v1';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyTzWPnbKwd2oPtb7FdmXoora4FZk-J3VEmXVR5Q8q5imOhlAZqJT_ZuRjsoR7zyF0k/exec';
+  const TOTAL = 30;
+  const STORAGE_KEY = 'vkj_lock_v1';
 
   let selected = null;
   let currentPhone = null;
 
-  // ─── helpers ───
   function show(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
   }
@@ -327,54 +336,30 @@
     const el = document.getElementById(elId);
     el.innerHTML = text ? `<div class="msg ${type}">${text}</div>` : '';
   }
-  function setLoading(on, text = 'ກຳລັງກວດສອບ...') {
-    document.getElementById('loading-text').textContent = text;
+  function setLoading(on) {
     document.getElementById('loading').classList.toggle('hidden', !on);
   }
-  function fmtPhone(p) { return '0' + p.replace(/^0+/, ''); }
-
-  // ─── localStorage cache ───
-  function getLocal() {
-    try { return JSON.parse(localStorage.getItem(LOCAL_KEY)); } catch { return null; }
-  }
-  function setLocal(phone, num) {
-    localStorage.setItem(LOCAL_KEY, JSON.stringify({ phone, num }));
+  function fmtPhone(p) {
+    return '0' + p.replace(/^0+/, '');
   }
 
-  // ─── Supabase API ───
-  async function sbCheck(phone) {
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/votes?phone=eq.${encodeURIComponent(phone)}&select=phone,number`,
-      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` } }
-    );
-    const data = await res.json();
-    return data && data.length > 0 ? data[0] : null;
+  // ─── localStorage: device lock ───
+  function getLock() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
+  }
+  function setLock(phone, num) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ phone, num, ts: Date.now() }));
   }
 
-  async function sbInsert(phone, number) {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/votes`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({ phone, number })
-    });
-    return res.status === 201 || res.status === 200;
-  }
-
-  // ─── on load ───
-  window.onload = async () => {
-    // Check localStorage first (fast)
-    const local = getLocal();
-    if (local) {
-      showBlocked(local.phone, local.num);
-      return;
+  // ─── on load: if device already voted → show blocked immediately ───
+  window.onload = () => {
+    const lock = getLock();
+    if (lock) {
+      showBlocked(lock.phone, lock.num);
+    } else {
+      show('s-login');
+      setTimeout(() => document.getElementById('inp-phone').focus(), 300);
     }
-    show('s-login');
-    setTimeout(() => document.getElementById('inp-phone').focus(), 300);
   };
 
   function showBlocked(phone, num) {
@@ -384,47 +369,27 @@
   }
 
   // ─── login ───
-  async function doLogin() {
-    // Block if localStorage locked
-    const local = getLocal();
-    if (local) { showBlocked(local.phone, local.num); return; }
+  function doLogin() {
+    // If device is locked → show blocked, ignore phone input entirely
+    const lock = getLock();
+    if (lock) { showBlocked(lock.phone, lock.num); return; }
 
     const raw = document.getElementById('inp-phone').value.trim().replace(/\s+/g, '');
     if (!raw || raw.length < 8) {
-      return showMsg('login-msg', '⚠️ ກະລຸນາໃສ່ເບີໂທທີ່ຖືກຕ້ອງ', 'err');
+      return showMsg('login-msg', '⚠️ ກະລຸນາໃສ່ເບີໂທທີ່ຖືກຕ້ອງ (ຢ່າງໜ້ອຍ 8 ຕົວ)', 'err');
     }
     showMsg('login-msg', '', '');
-    setLoading(true, 'ກຳລັງກວດສອບເບີໂທ...');
-
-    try {
-      const phone = fmtPhone(raw);
-      const existing = await sbCheck(phone);
-      setLoading(false);
-
-      if (existing) {
-        // Phone already voted in DB → lock locally + show blocked
-        setLocal(raw, existing.number);
-        showBlocked(raw, existing.number);
-        return;
-      }
-
-      // Not voted yet → go to vote screen
-      currentPhone = raw;
-      document.getElementById('disp-phone').textContent = fmtPhone(raw);
-      selected = null;
-      buildGrid();
-      document.getElementById('sel-preview').style.display = 'none';
-      document.getElementById('btn-submit').disabled = true;
-      showMsg('vote-msg', '', '');
-      show('s-vote');
-
-    } catch (e) {
-      setLoading(false);
-      showMsg('login-msg', '❌ ບໍ່ສາມາດເຊື່ອມຕໍ່ລະບົບໄດ້ ກະລຸນາລອງໃໝ່', 'err');
-    }
+    currentPhone = raw;
+    document.getElementById('disp-phone').textContent = fmtPhone(raw);
+    selected = null;
+    buildGrid();
+    document.getElementById('sel-preview').style.display = 'none';
+    document.getElementById('btn-submit').disabled = true;
+    showMsg('vote-msg', '', '');
+    show('s-vote');
   }
 
-  // ─── grid ───
+  // ─── build number grid ───
   function buildGrid() {
     const g = document.getElementById('num-grid');
     g.innerHTML = '';
@@ -439,7 +404,7 @@
   }
 
   function selectNum(n) {
-    if (selected) { const p = document.getElementById('nb' + selected); if(p) p.classList.remove('selected'); }
+    if (selected) { const p = document.getElementById('nb' + selected); if (p) p.classList.remove('selected'); }
     selected = n;
     document.getElementById('nb' + n).classList.add('selected');
     document.getElementById('sel-num').textContent = 'No. ' + n;
@@ -452,50 +417,38 @@
   async function doVote() {
     if (selected === null || !currentPhone) return;
 
-    // Last check localStorage
-    const local = getLocal();
-    if (local) { showBlocked(local.phone, local.num); return; }
+    // Last-second check
+    const lock = getLock();
+    if (lock) { showBlocked(lock.phone, lock.num); return; }
 
-    setLoading(true, 'ກຳລັງບັນທຶກການໂຫວດ...');
+    setLoading(true);
     document.getElementById('btn-submit').disabled = true;
 
     const phone = fmtPhone(currentPhone);
+    const payload = {
+      phone,
+      number: selected,
+      ts: new Date().toLocaleString('lo-LA', { timeZone: 'Asia/Vientiane' })
+    };
 
     try {
-      // Check DB one more time before insert (prevent race condition)
-      const existing = await sbCheck(phone);
-      if (existing) {
-        setLoading(false);
-        setLocal(currentPhone, existing.number);
-        showBlocked(currentPhone, existing.number);
-        return;
-      }
-
-      const ok = await sbInsert(phone, selected);
-      if (ok) {
-        // Lock locally
-        setLocal(currentPhone, selected);
-        setLoading(false);
-        document.getElementById('done-num').textContent = selected;
-        document.getElementById('done-phone').textContent = phone;
-        show('s-done');
-      } else {
-        setLoading(false);
-        showMsg('vote-msg', '❌ ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃໝ່', 'err');
-        document.getElementById('btn-submit').disabled = false;
-      }
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
     } catch (e) {
-      setLoading(false);
-      // If duplicate key error from Supabase (phone already voted)
-      const recheck = await sbCheck(phone).catch(() => null);
-      if (recheck) {
-        setLocal(currentPhone, recheck.number);
-        showBlocked(currentPhone, recheck.number);
-      } else {
-        showMsg('vote-msg', '❌ ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃໝ່', 'err');
-        document.getElementById('btn-submit').disabled = false;
-      }
+      // no-cors means we can't read response, but request was sent
     }
+
+    // Lock device immediately regardless
+    setLock(currentPhone, selected);
+    setLoading(false);
+
+    document.getElementById('done-num').textContent = selected;
+    document.getElementById('done-phone').textContent = phone;
+    show('s-done');
   }
 </script>
 </body>
